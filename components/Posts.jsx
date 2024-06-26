@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import { Colors } from "../constants/Colors";
+import { Colors, font } from "../constants/Colors";
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 
 const Posts = () => {
@@ -28,7 +28,7 @@ const Posts = () => {
         borderRadius: 10,
         elevation: 3,
         backgroundColor: "white",
-        margin: 10,
+        // margin: 10,
       }}
     >
       {/* post header */}
@@ -48,7 +48,7 @@ const Posts = () => {
             style={{
               fontSize: 18,
               color: Colors.veryDarkGrey,
-              fontFamily: "PopIns-Regular",
+              fontFamily: font.poppins,
             }}
           >
             Jeya Prakash
@@ -57,7 +57,7 @@ const Posts = () => {
             style={{
               fontSize: 13,
               color: Colors.lightGrey,
-              fontFamily: "PopIns-Regular",
+              fontFamily: font.poppins,
             }}
           >
             The MDT Hindu College
@@ -71,9 +71,7 @@ const Posts = () => {
         </TouchableOpacity>
       </View>
       {/* post about */}
-      <Text
-        style={{ fontFamily: "PopIns-Regular", fontSize: 13, marginTop: 10 }}
-      >
+      <Text style={{ fontFamily: font.poppins, fontSize: 13, marginTop: 10 }}>
         {expanded
           ? initialText
           : `${initialText.split(" ").slice(0, wordThreshold).join(" ")}...`}
@@ -105,10 +103,10 @@ const Posts = () => {
           borderBottomWidth: 1,
         }}
       >
-        <Text style={{ fontFamily: "PopIns-Regular", fontSize: 13 }}>
+        <Text style={{ fontFamily: font.poppins, fontSize: 13 }}>
           You and 11 others
         </Text>
-        <Text style={{ fontFamily: "PopIns-Regular", fontSize: 13 }}>
+        <Text style={{ fontFamily: font.poppins, fontSize: 13 }}>
           +31 Comments
         </Text>
       </View>

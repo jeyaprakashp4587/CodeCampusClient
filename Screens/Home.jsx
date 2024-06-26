@@ -37,6 +37,7 @@ const Home = ({ navigation }) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          paddingBottom: 15,
         }}
       >
         <Image
@@ -149,6 +150,10 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         {/* posts */}
+        <Posts />
+        <Posts />
+        <Posts />
+        <Posts />
         <Posts />
       </ScrollView>
     </View>

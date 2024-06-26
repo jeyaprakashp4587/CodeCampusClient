@@ -2,10 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../Screens/Login";
+import Login from "../LoginSystem/Login";
 import Home from "../Screens/Home";
 import Profile from "../Screens/Profile";
-import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../constants/Colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -19,6 +18,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Challenge from "../Screens/Challenge";
 import Notifications from "../Screens/Notifications";
 import MessageScreen from "../Screens/MessageScreen";
+import { useState } from "react";
+import { useEffect } from "react";
+import SignUp from "../LoginSystem/SignUp";
 
 // ------------- //
 // Tab navigations
@@ -122,11 +124,24 @@ const TabNavigation = () => {
   );
 };
 // stack navigations
-const StackNavigations = () => {
+const StackNavigations = (props) => {
+  const [routname, setRoutename] = useState("index");
   const Stack = createNativeStackNavigator();
+  useEffect(() => {
+    const checkStatus = async () => {
+      const status = await props.status._j;
+      // console.log("Status from props:", status);
+      if (status === "index") {
+        setRoutename("login");
+        // console.log("Set initial route to login");
+      }
+    };
+
+    checkStatus();
+  }, [props.status]);
   return (
     <Stack.Navigator
-      initialRouteName="index"
+      initialRouteName="login"
       screenOptions={{
         headerShown: false,
       }}
@@ -147,6 +162,11 @@ const StackNavigations = () => {
         options={{ headerShadow: false }}
       />
       <Stack.Screen
+        name="signup"
+        component={SignUp}
+        options={{ headerShadow: false }}
+      />
+      <Stack.Screen
         name="message"
         component={MessageScreen}
         options={{ headerShadow: false }}
@@ -156,8 +176,8 @@ const StackNavigations = () => {
 };
 
 // --------------- //
-const Navigation = () => {
-  return <StackNavigations />;
+const Navigation = (props) => {
+  return <StackNavigations status={props.status} />;
 };
 
 export default Navigation;
