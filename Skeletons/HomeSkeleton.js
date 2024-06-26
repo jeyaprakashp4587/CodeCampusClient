@@ -9,7 +9,7 @@ const HomeSkeleton = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Skeleton width={60} height={60} radius={40} />
-          <Skeleton width={300} height={60} radius={10} />
+          <Skeleton width={250} height={60} radius={10} />
           <Skeleton width={50} height={60} radius={10} />
         </View>
         <View

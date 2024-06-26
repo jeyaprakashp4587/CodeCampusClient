@@ -18,6 +18,7 @@ import Post from "../Screens/Post";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Challenge from "../Screens/Challenge";
 import Notifications from "../Screens/Notifications";
+import MessageScreen from "../Screens/MessageScreen";
 
 // ------------- //
 // Tab navigations
@@ -29,27 +30,30 @@ const TabNavigation = () => {
       initialRouteName="home"
       screenOptions={{
         headerShown: false,
+        // tabBarShowLabel: false,
         tabBarIconStyle: {
           color: Colors.lightGrey,
         },
         tabBarActiveTintColor: "#3385ff",
         tabBarInactiveTintColor: Colors.lightGrey,
         tabBarStyle: {
-          height: 90,
+          height: 85,
           paddingBottom: 10,
           borderTopWidth: 0,
           backgroundColor: "white",
         },
         tabBarLabelStyle: {
-          fontSize: 11.7,
-          marginTop: -5,
+          fontSize: 11,
+          marginTop: -25,
           marginBottom: 5,
-          // fontFamily: "Poppins_400Regular",
+          fontFamily: "PopIns-Regular",
+          color: Colors.veryDarkGrey,
         },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Screen
-        name="home"
+        name="Home"
         component={Home}
         options={{
           headerShadow: false,
@@ -59,7 +63,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="challenge"
+        name="Challenge"
         component={Challenge}
         options={{
           headerShadow: false,
@@ -73,7 +77,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="post"
+        name="Post"
         component={Post}
         options={{
           headerShadow: false,
@@ -95,7 +99,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="notification"
+        name="Notification"
         component={Notifications}
         options={{
           headerShadow: false,
@@ -105,7 +109,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="profile"
+        name="Profile"
         component={Profile}
         options={{
           headerShadow: false,
@@ -135,6 +139,16 @@ const StackNavigations = () => {
       <Stack.Screen
         name="index"
         component={TabNavigation}
+        options={{ headerShadow: false }}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{ headerShadow: false }}
+      />
+      <Stack.Screen
+        name="message"
+        component={MessageScreen}
         options={{ headerShadow: false }}
       />
     </Stack.Navigator>

@@ -60,5 +60,14 @@
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
   },
-  "private": true
+  "private": true,
+  "assets": [
+    "./assets/fonts/"
+  ],
+  "fonts": [
+    {
+      "PopIns-Regular": "./assets/fonts/Poppins-ExtraLight.ttf",
+      "PopIns-Bold": "./assets/fonts/Poppins-Thin.ttf"
+    }
+  ]
 }

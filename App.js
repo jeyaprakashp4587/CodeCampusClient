@@ -4,11 +4,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./Navigations/Navigation";
 import { Context_Data } from "./Context/ContextProvider";
+import * as font from "expo-font";
 
 const App = () => {
-  // if (!fontsLoaded) {
-  //   return <Text>Loading...</Text>; // or some loading indicator
-  // }
+  useEffect(() => {
+    const loadFont = async () => {
+      await font.loadAsync({
+        "PopIns-Regular": require("./assets/fonts/Poppins-ExtraLight.ttf"),
+        "PopIns-Bold": require("./assets/fonts/Poppins-Thin.ttf"),
+      });
+    };
+    loadFont();
+  }, []);
+
   return (
     <NavigationContainer>
       <Context_Data>
@@ -26,6 +34,7 @@ const styles = StyleSheet.create({
   cn: {
     flex: 1,
     backgroundColor: "#ffff",
+    marginTop: "10%",
     // paddingHorizontal: 10,
   },
 });
