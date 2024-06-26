@@ -86,6 +86,7 @@ const SignUp = ({ navigation }) => {
           alignSelf: "center",
         }}
       />
+      <Text>fg</Text>
     </View>
   );
 };
