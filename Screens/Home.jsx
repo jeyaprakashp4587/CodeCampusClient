@@ -16,21 +16,71 @@ import HomeSkeleton from "../Skeletons/HomeSkeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { EvilIcons } from "@expo/vector-icons";
 import Posts from "../components/Posts";
+import { Calendar } from "react-native-calendars";
 
 const Home = ({ navigation }) => {
+  // calender display
+  const [calendardis, setCalenderdis] = useState(false);
+  const [act, setActdate] = useState();
   // initialize skeleton effect
   const [load, setLoad] = useState(false);
+
   useEffect(() => {
     setTimeout(() => {
       setLoad(true);
     }, 3000);
   }, []);
+
+  // show user activity functions
+  const activityobg = [
+    {
+      activityType: "COURSE_COMPLETED",
+      description: "Completed React Native Course",
+      timestamp: "2024-06-25T12:34:56Z",
+    },
+    {
+      activityType: "COURSE_COMPLETED",
+      description: "Completed React Native Course",
+      timestamp: "2024-06-26T12:34:56Z",
+    },
+  ];
+
+  useEffect(() => {
+    const fot = formatActivitiesForCalendar(activityobg);
+    console.log(fot);
+    setActdate(fot);
+  }, []);
+  const formatActivitiesForCalendar = (activities) => {
+    const formatted = {};
+    activities.forEach((activity) => {
+      const date = activity.timestamp.split("T")[0];
+      if (!formatted[date]) {
+        formatted[date] = { marked: true, dots: [] };
+      }
+      formatted[date].dots.push({ key: activity.id, color: "blue" });
+    });
+    return formatted;
+  };
+  // render skeleton
   if (!load) {
     console.log(load);
     return <HomeSkeleton />;
   }
   return (
     <View style={pageView}>
+      {/* calender component for absolute */}
+      <Calendar
+        style={{
+          position: "absolute",
+          zIndex: 10,
+          top: 10,
+          // width: 100,
+          // height: 100,
+          left: 200,
+        }}
+        markedDates={act}
+        markingType={"dot"}
+      />
       {/* home header */}
       <View
         style={{
@@ -72,7 +122,7 @@ const Home = ({ navigation }) => {
           <AntDesign name="message1" size={24} color={Colors.lightGrey} />
         </TouchableOpacity>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* ideas wrapper */}
         <View
           style={{
@@ -131,9 +181,12 @@ const Home = ({ navigation }) => {
               Rewards
             </Text>
           </View>
-          <View style={styles.ideaBox}>
+          <TouchableOpacity
+            style={styles.ideaBox}
+            onPress={() => setCalenderdis(!calendardis)}
+          >
             <Image
-              source={require("../assets/images/score.png")}
+              source={require("../assets/images/calendar.png")}
               style={{ width: 35, height: 35, tintColor: "#006666" }}
             />
             <Text
@@ -145,9 +198,10 @@ const Home = ({ navigation }) => {
               }}
               numberOfLines={1}
             >
-              Leaderboard
+              Your Activity
             </Text>
-          </View>
+          </TouchableOpacity>
+          {/* display: calendardis ? "flex" : "none"  */}
         </View>
         {/* posts */}
         <Posts />

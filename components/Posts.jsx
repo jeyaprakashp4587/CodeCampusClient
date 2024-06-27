@@ -28,6 +28,7 @@ const Posts = () => {
         borderRadius: 10,
         elevation: 3,
         backgroundColor: "white",
+        marginBottom: 10,
         // margin: 10,
       }}
     >

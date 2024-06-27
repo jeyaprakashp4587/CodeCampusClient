@@ -141,7 +141,7 @@ const StackNavigations = (props) => {
   }, [props.status]);
   return (
     <Stack.Navigator
-      initialRouteName="login"
+      initialRouteName="index"
       screenOptions={{
         headerShown: false,
       }}
