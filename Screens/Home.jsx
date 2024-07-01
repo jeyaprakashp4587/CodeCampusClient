@@ -34,20 +34,17 @@ const Home = ({ navigation }) => {
   // show user activity functions
   const activityobg = [
     {
-      activityType: "COURSE_COMPLETED",
-      description: "Completed React Native Course",
       timestamp: "2024-06-25T12:34:56Z",
+      course: [{ cr1: "react", cr2: "css", cr3: "html" }],
     },
     {
-      activityType: "COURSE_COMPLETED",
-      description: "Completed React Native Course",
-      timestamp: "2024-06-26T12:34:56Z",
+      timestamp: "2024-07-01T12:34:56Z",
+      course: [{ name: "java script" }],
     },
   ];
 
   useEffect(() => {
     const fot = formatActivitiesForCalendar(activityobg);
-    console.log(fot);
     setActdate(fot);
   }, []);
   const formatActivitiesForCalendar = (activities) => {
@@ -57,8 +54,9 @@ const Home = ({ navigation }) => {
       if (!formatted[date]) {
         formatted[date] = { marked: true, dots: [] };
       }
-      formatted[date].dots.push({ key: activity.id, color: "blue" });
+      formatted[date].dots.push({ color: "red" });
     });
+    // console.log("formated", formatted);
     return formatted;
   };
   // render skeleton
@@ -80,6 +78,11 @@ const Home = ({ navigation }) => {
         }}
         markedDates={act}
         markingType={"dot"}
+        onDayPress={(day) => {
+          // filter = activityobg.filter((fil) => fil.);
+          // const da = act;
+          console.log("act", act[day.dateString]);
+        }}
       />
       {/* home header */}
       <View
