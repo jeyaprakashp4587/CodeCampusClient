@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 import React, { useState } from "react";
 import { Colors, pageView } from "../constants/Colors";
@@ -22,6 +23,8 @@ const Home = ({ navigation }) => {
   // calender display
   const [calendardis, setCalenderdis] = useState(false);
   const [act, setActdate] = useState();
+  const [activitiesdis, setActivitiesDis] = useState(false);
+  const [activitieslist, setActivitiesList] = useState();
   // initialize skeleton effect
   const [load, setLoad] = useState(false);
 
@@ -35,11 +38,11 @@ const Home = ({ navigation }) => {
   const activityobg = [
     {
       timestamp: "2024-06-25T12:34:56Z",
-      course: [{ cr1: "react", cr2: "css", cr3: "html" }],
+      course: ["react", "css", "html"],
     },
     {
       timestamp: "2024-07-01T12:34:56Z",
-      course: [{ name: "java script" }],
+      course: ["java script"],
     },
   ];
 
@@ -52,9 +55,10 @@ const Home = ({ navigation }) => {
     activities.forEach((activity) => {
       const date = activity.timestamp.split("T")[0];
       if (!formatted[date]) {
-        formatted[date] = { marked: true, dots: [] };
+        formatted[date] = { marked: true, dots: [], course: [] };
       }
       formatted[date].dots.push({ color: "red" });
+      formatted[date].course.push(...activity.course);
     });
     // console.log("formated", formatted);
     return formatted;
@@ -81,9 +85,30 @@ const Home = ({ navigation }) => {
         onDayPress={(day) => {
           // filter = activityobg.filter((fil) => fil.);
           // const da = act;
-          console.log("act", act[day.dateString]);
+          setActivitiesDis(!activitiesdis);
+          console.log("act", act[day.dateString].course);
+          setActivitiesList(act[day.dateString].course);
         }}
       />
+      <View
+        style={{
+          // borderWidth: 1,
+          width: 150,
+          height: 200,
+          position: "absolute",
+          zIndex: 90,
+          backgroundColor: "white",
+          elevation: 5,
+          alignSelf: "center",
+          top: "40%",
+          display: activitiesdis ? "flex" : "none",
+        }}
+      >
+        <FlatList
+          data={activitieslist}
+          renderItem={({ item }) => <Text>{item}</Text>}
+        />
+      </View>
       {/* home header */}
       <View
         style={{
